@@ -1,6 +1,6 @@
 ---
 name: speckit-code
-description: Spec-Driven Development (GitHub Spec Kit) workflow + executor guardrails. Use when starting or running a complex coding project and you want to enforce a spec→plan→tasks workflow in the repo (Spec Kit directory structure) before implementing. Also use when you must drive implementation via an execution agent (default: Codex CLI; optional: Claude Code) that is only allowed to work against tasks.md and must write results back.
+description: "Spec-Driven Development (GitHub Spec Kit) workflow + executor guardrails. Use when starting or running a complex coding project and you want to enforce a spec→plan→tasks workflow in the repo (Spec Kit directory structure) before implementing. Also use when you must drive implementation via an execution agent (default: Codex CLI; optional: Claude Code) that is only allowed to work against tasks.md and must write results back."
 ---
 
 # Speckit Code
@@ -111,3 +111,5 @@ bash pty:true workdir:/path/to/repo background:true command:"./skills/speckit-co
 
 - `scripts/bootstrap_spec_kit.sh`: bootstrap/upgrade helper
 - `scripts/next_task.py`: extract the next incomplete task from tasks.md
+- `scripts/build_executor_prompt.py`: build a constrained prompt from Spec Kit artifacts
+- `scripts/run_codex_executor.sh`: run Codex CLI for the next task
