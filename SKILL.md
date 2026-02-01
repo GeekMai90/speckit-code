@@ -78,26 +78,29 @@ Hard gate: do not implement until `tasks.md` exists and is actionable.
 
 ### Step 5 — Implement via executor (default: Codex CLI)
 
+Hard gate: do not implement until `specs/<feature>/tasks.md` exists and is actionable.
+
 #### Pick next task
-Use:
 ```bash
 python3 skills/speckit-code/scripts/next_task.py specs/<feature>/tasks.md
 ```
 
-#### Executor contract (what you send to Codex/Claude)
-Always include:
-- feature path: `specs/<feature>/`
-- the **exact task text**
-- constraints: “only do this task; don’t add features; stop if spec/plan missing”
-- required outputs:
-  - patch summary
-  - changed files list
-  - verification commands + results
-  - update `tasks.md` status line(s)
+#### Build a constrained executor prompt
+```bash
+python3 skills/speckit-code/scripts/build_executor_prompt.py specs/<feature>
+```
+
+#### Run Codex CLI executor (recommended: OpenClaw background + PTY)
+From the **repo root** (must be a git repo):
+```bash
+bash pty:true workdir:/path/to/repo background:true command:"./skills/speckit-code/scripts/run_codex_executor.sh specs/<feature>"
+```
+
+(If you are running manually in a terminal: `./skills/speckit-code/scripts/run_codex_executor.sh specs/<feature>`)
 
 #### Executor selection
 - default executor: **Codex CLI**
-- optional executor: **Claude Code** when you explicitly request it
+- optional executor: **Claude Code** only when explicitly requested
 
 ## Troubleshooting & safety
 
